@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>模拟手机短信</title>
+<style>
+	body,ul,p{margin:0; padding:0; font-family: "兰亭黑-简";}
+	li{list-style: none; vertical-align: top;}
+	a{text-decoration: none;}
+	a:hover{text-decoration: none;}
+	img{border:none;}
+	/* */
+	#bg {height:562px; width:322px; background: #e5e3eb; border-radius: 15px; box-shadow: 10px 10px 10px #8482ad; margin:0 auto; margin-top: 120px; position:relative;}
+	#main {height: 460px; width:290px; background: #e3e3e3; border: 2px solid #000;float:left; margin-left: 14px;  margin-top: 40px; position: relative;}
+	#show {height:406px;width:290px; background:#fff; position: absolute;overflow-y:scroll; overflow-x:hidden;}
+	#text1 {position: absolute;bottom:10px; left: 55px; height:30px; width:180px;}
+	#btn {border: none; position: absolute; left: 242px; bottom: 13px; font-size: 16px; color: #cc7b8c; background: none;}
+	#btn:active {font-size: 18px;}
+	#img1 {position:absolute; left:8px;; bottom:8px;;}
+	.b_bg {background: url(img/bg.jpg) no-repeat; background-size: 100%;}
+	.logo {position: absolute; top:91%; left:45%;}
+	
+	.red_r_img {float:right; margin-top: 4px; margin-right: 4px;}
+	.red_r_arr {float:right;margin-top:15px; margin-right: 6px;}
+	.red_r_p {background: #bab3ce; font-size:14px; line-height: 20px;float:right; padding:4px; border-radius: 3px;margin-top:7px;word-break:break-all;}
+	.red_r_p_div {width:210px; float:right;}
+	.Li_C,ul {display:inline-block;width:100%}
+	.blue_l_img {float:left;margin-left:4px; margin-top: 4px;}
+	.blue_l_arr {float:left; margin-left:6px; margin-top: 15px;}
+	.blue_l_p {background:#e5e5e5; font-size:14px; line-height: 20px; padding:4px; border-radius: 3px;float:left;margin-top:7px;word-break:break-all; } 
+	.blue_l_p_div {width:210px; float:left;}
+	
+	
+</style>
+
+
+
+
+ 
+</head>
+
+<body class="b_bg">
+
+<div id="bg">
+    <img  class="logo" src="img/miaov.png" />
+	<div id="main">
+    
+	    <div id="show">
+	        <ul id="U_P">	  
+		
+		
+	        </ul>
+	    </div>
+	    
+    	<img id="img1" src="img/lico.png"  />
+	    <input id="text1" type="text" />
+	    <input id="btn" type="button" value="发送" />
+	</div>
+</div>
+
+
+<script>
+	let Img1 = document.getElementById('img1');
+	let Btn = document.getElementById('btn');
+	let Text1 = document.getElementById('text1');
+	let U_p = document.getElementById('U_P');
+	
+	let Imgv = 0; //第一个蓝色头像值是0
+	
+	Img1.onclick = function (){
+		if (Imgv == 0){
+			Img1.src = 'img/rico.png';
+			Imgv = 1;
+		}else{
+			Img1.src = 'img/lico.png';
+			Imgv = 0;	
+		}
+	}
+	
+	Btn.onclick = function (){
+		
+		let Tv = Text1.value;
+		if(Tv == ''){
+			alert('请输入点东西吧～～～');
+		}else{
+			if(Imgv == 0){
+				U_p.innerHTML = '<li class="Li_C"><img class="blue_l_img" src="img/lico.png" /><img class="blue_l_arr" src="img/l01.png" /><div class="blue_l_p_div"><p class="blue_l_p">'+ Tv +'</div></p></li>' + U_p.innerHTML
+			}else{
+				U_p.innerHTML = '<li class="Li_C"><img class="red_r_img" src="img/rico.png" /><img class="red_r_arr" src="img/r01.png" /><div class="red_r_p_div"><p class="red_r_p">'+ Tv +'</div></p></li>' + U_p.innerHTML
+			}
+		
+		
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		Text1.value = '';
+		}
+	}
+
+
+	
+	
+	
+</script>
+</body>
+</html>

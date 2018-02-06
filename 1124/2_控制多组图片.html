@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>控制多组图片</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+				font-family: "微软雅黑";
+				
+			}
+		    .bg{
+		    	width:871px;
+		    	height: 553px;
+		    	background: url(img/bg.jpg) no-repeat;
+		    	margin: 0 auto;
+		    }
+		    #oDiv1{
+		    	position:relative;
+		    	top: 128px;
+		    	left: 45px;
+		    	width: 447px;
+		    	height: 295px;
+		    	float: left;
+		    }
+		    #oDiv1 img{
+		    	width:447px ;
+		    	height: 245px;
+		    	position: absolute;
+		    	
+		    }
+		    p{
+		    	position: absolute;
+		    	top: 86%;
+		    	left: 35%;
+		    }
+		    #oDiv2{
+		    	height: 295px;
+		    	width: 248px;
+		    	position:relative;
+		    	top:128px;
+		    	left:115px ;
+		    	float: left;
+		    }
+		    #oDiv2 img{
+		    	width: 248px;
+		    	height: 245px;
+		    	position: absolute;
+		    	left: 0;
+		    	top:0;
+		    }
+		    #pre{
+		    	position: absolute;
+		    	top: 102px;
+		    	left:288px;
+		    }
+		    #next{
+		    	position: absolute;
+		    	top:102px;
+		    	left:345px;
+		    }
+		    a{
+		    	width: 60px;
+		    	height: 60px;
+		    	background-color: #fff;
+		    	opacity: 0.3;
+		    	display: block;
+		    	color: #000;
+		    	font-size: 48px;
+		    	line-height: 60px;
+		    	position: absolute;
+		    	top: 33%;
+		    	text-align: center;
+		    	
+		    }
+		    #before1,#before2{
+		    	left: 0px;
+		    }
+		    #after1,#after2{
+		    	right: 0px;
+		    }
+		    a:link,a:active,a:visited{
+		    	text-decoration: none;
+		    	
+		    }
+		    a:hover{
+		    	opacity: 0.7;
+		    }
+		</style>
+	</head>
+	<body>
+		<div class="bg">
+			<button id="pre">上一组</button>
+			<button id="next">下一组</button>
+			<div id="oDiv1">
+			    <img src="img/1.jpg" alt=""  />
+				<p id="p1">这是第1张图片</p>
+				<a href="javascript:;" id="before1"><</a>
+				<a href="javascript:;" id="after1">></a>
+			</div>
+			<div id="oDiv2">
+				<img src="img/01.jpg" />
+				<p id="p2">这是第1张图片</p>
+				<a href="javascript:;" id="before2"><</a>
+				<a href="javascript:;" id="after2">></a>
+			</div>
+		</div>
+		
+<script>   
+	var Img1 = document.getElementsByTagName('img');
+	var P1 = document.getElementsByTagName('p');
+	var A1 = document.getElementsByTagName('a');
+	var Btn1 = document.getElementsByTagName('button');
+	
+	let Arr1 = [
+					"img/1.jpg",
+					"img/2.jpg",
+					"img/3.jpg",
+					"img/4.jpg" 
+				]
+	let Arr2 = [
+					"img/01.jpg",
+					"img/02.jpg",
+					"img/03.jpg",
+				]
+
+	var i=0;
+	var j=0;
+	
+	function pic1_pre(){
+		i--;
+		if (i<0){
+			i = Arr1.length-1;
+		}		
+		Img1[0].src= Arr1[i];
+		P1[0].innerText = '这是第'+(i+1)+'张图片'	
+	}
+	function pic1_next(){
+		i++;
+		if (i>Arr1.length-1){
+			i = 0;
+		}		
+		Img1[0].src= Arr1[i];
+		P1[0].innerText = '这是第'+(i+1)+'张图片'
+	}
+	function pic2_pre(){
+		j--;
+		if (j<0){
+			j = Arr2.length-1;
+		}		
+		Img1[1].src= Arr2[j];
+		P1[1].innerText = '这是第'+(j+1)+'张图片'
+	}
+	function pic2_next(){
+		j++;
+		if (j>Arr2.length-1){
+			j = 0;
+		}		
+		Img1[1].src= Arr2[j];
+		P1[1].innerText = '这是第'+(j+1)+'张图片'
+	}	
+	A1[0].onclick = pic1_pre;
+	A1[1].onclick = pic1_next;
+	A1[2].onclick = pic2_pre;
+	A1[3].onclick = pic2_next;
+	Btn1[0].onclick = function (){
+		pic2_pre();
+		pic1_pre();
+	}
+	Btn1[1].onclick = function (){
+		pic1_next();
+		pic2_next();
+	}
+	
+			
+</script>
+		
+	</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #body{
+            background: skyblue;
+            height: 100%;
+            width: 100%;           
+        }
+        #box{
+            height: 500px;
+            width: 100px;
+            position: fixed;
+            left: 300px;
+            top: 100px;
+            background: #fff;           
+            overflow: hidden;
+            border: 1px solid #000;
+            border-radius: 10px 0px 0px 10px;
+        }
+        #box ul{
+            position: absolute;
+        }
+        #box li{
+            height: 30px;
+            width:80px;
+            padding-left: 20px;
+            list-style: none;
+        }
+        #scrolll{
+            height: 500px;
+            width:30px;
+            background: #fff;
+            border:1px solid #000;
+            border-left: none;
+            position: fixed;
+            left: 402px;
+            top:100px;
+            border-radius: 0px 10px 10px 0px;
+        }
+        #ti{
+            height:460px;
+            position: absolute;
+            top:20px;
+            width: 30px;
+            background: #fff;
+        }
+        #scrolll span{
+            height: 20px;
+            width: 30px;
+            display: block;
+            background: #fff;
+            position: absolute;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 0px 10px 10px 0px;
+        }
+        #pre{
+            top:0px;
+        }
+        #next{
+            top:480px;
+        }
+        #tiao{
+            height: 100px;
+            background: gray;
+            position: absolute;
+            top:0px;
+            width:30px;
+        }
+    </style>
+</head>
+<body id="body">
+    <div id="box">
+        <ul>
+        </ul>
+    </div>
+    <div id="scrolll">
+        <span id="pre">^</span>
+        <div id="ti">
+            <div id="tiao"></div>
+        </div>
+        <span id="next">v</span>
+    </div>
+<script src="data.js"></script> 
+<script>
+    var Box=document.getElementById('box')
+    var Tiao=document.getElementById('tiao')
+    var t=0;
+    var ull=Box.querySelector('ul')
+    var num=0;
+    var timer=null;
+    var onoff=true;
+    //加载数据
+    arrCity.forEach((e,i) => {
+        var Linew=document.createElement('li')
+        Linew.innerText=e.name;
+        ull.appendChild(Linew)    
+    });
+    //鼠标拖动
+    Tiao.onmousedown=function(ev){
+        var disY=ev.pageY-Tiao.offsetTop;
+        document.onmousemove=function(ev){
+            num=ev.pageY-disY
+            num=move(num)
+        }
+        document.onmouseup=function(ev){
+            document.onmousemove=document.onmouseup=null;
+        }
+        return false
+    }
+    //键盘事件
+    document.onkeydown=function(ev){
+        if(!onoff)return
+        onoff=false
+        var num2=0;
+        timer=setInterval(function(){
+            num2=num2+5;
+            if(ev.keyCode==38){       
+                num=num-num2
+            }
+            if(ev.keyCode==40){       
+                num=num+num2
+            }             
+            num=move(num)
+        },30)
+    }
+    document.onkeyup=function(ev){
+        clearInterval(timer)
+        onoff=true
+    }
+    //点击上键移动
+    pre.onmousedown=function(){
+        var num3=0;
+        timer=setInterval(function(){
+            num3=num3+5;
+            num=num-num3
+            num=move(num)
+            document.onmouseup=function(ev){
+                clearInterval(timer)
+            }
+        },30)
+        return false
+    }
+    //点击下键移动
+    next.onmousedown=function(){
+        var num3=0;
+        timer=setInterval(function(){
+            num3=num3+5;
+            num=num+num3
+            num=move(num)
+            document.onmouseup=function(ev){
+                clearInterval(timer)
+            }
+        },30)
+        return false
+    }
+    //点击空白的位置移动
+    ti.onmousedown=function(ev){
+        if(ev.target==Tiao)return
+        Tiao.style.transition='0.3s'
+        ull.style.transition='0.3s'
+        var diss=ev.pageY-ti.offsetTop-scrolll.offsetTop;
+        num=diss;
+        num=move(num)
+        setTimeout(function(){
+            Tiao.style.transition=null
+            ull.style.transition=null
+        },300)
+        return false
+    }
+    
+//移动函数
+function move(num){
+    if(num>(ti.offsetHeight-Tiao.offsetHeight)){
+        num=(ti.offsetHeight-Tiao.offsetHeight)
+    }
+    if(num<0){
+        num=0
+    }
+    Tiao.style.top=num+'px';
+    t=num/(ti.offsetHeight-Tiao.offsetHeight)
+    ull.style.top=-(ull.scrollHeight-Box.offsetHeight)*t+'px'
+    return num
+}
+</script> 
+</body>
+</html>

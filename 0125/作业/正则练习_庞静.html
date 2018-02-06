@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #contain {
+            width: 400px;
+            /* height: 400px; */
+            border: 1px solid yellowgreen;
+            border-radius: 20px;
+            margin: 20px auto;
+            padding: 60px 30px 30px 30px;
+            box-sizing: border-box;
+        }
+
+        #contain div {
+            margin-bottom: 30px;
+        }
+
+        #contain div span {
+            font-size: 20px;
+            color: #555;
+            width: 80px;
+            display: inline-block;
+        }
+
+        #contain div input {
+            width: 200px;
+            height: 30px;
+            outline: none;
+            padding-left: 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid yellowgreen;
+        }
+
+        #btn {
+            display: block;
+            outline: none;
+            width: 100px;
+            height: 40px;
+            border: 1px solid yellowgreen;
+            background-color: #fff;
+            border-radius: 10px;
+            font-size: 20px;
+            margin: 20px auto;
+            cursor:no-drop;
+            color: #555;
+
+        }
+
+        #contain .ok {
+            border-color: yellowgreen;
+        }
+
+        #contain .error {
+            border-color: red;
+        }
+        #contain div p{
+            color:red;
+            font-size: 12px;
+            margin-left: 90px;
+            display: none
+        }
+
+    </style>
+</head>
+<body>
+<div id="contain">
+    <div id="qq">
+        <span>QQ：</span>
+        <input type="text" name="qq" placeholder="请输入QQ">
+        <p>6~12位数字，不能以0开头</p>
+    </div>
+    <div id="email">
+        <span>Email：</span>
+        <input type="text" name="email" placeholder="请输入邮箱">
+        <p>6~18个字符，可使用字母、数字、下划线，需以字母开头</p>
+    </div>
+    <div id="mobile">
+        <span>Mobile：</span>
+        <input type="text" name="phone" placeholder="请输入手机号码">
+        <p>以1开头第二位为3.5.6.7.8的11位数字</p>
+    </div>
+    <div id="date">
+        <span>Date：</span>
+        <input type="text" name="birth" placeholder="请输入生日">
+        <p id='gs'>格式为yyyy/mm/dd或者yyyy-mm-dd并输入正确日期</p>
+    </div>
+
+    <p><input type="submit" value="注册" id="btn"></p>
+
+</div>
+<script>
+    const inputs = Array.from(document.querySelectorAll('input[name]'));
+    // console.log(input);
+    var nowY=new Date().getFullYear()
+    var nowM=new Date().getMonth()+1
+    var nowD=new Date().getDate()
+
+    let re = {
+        qq:/^[1-9]\d{5,11}$/,
+        //6~18个字符，可使用字母、数字、下划线，需以字母开头
+        email:/^[a-z][\w\.\-]{5,17}@[0-9a-z]{1,8}(\.[a-z]{2,3}){1,2}$/i,
+        phone:/^1[35678]\d{9}$/,
+        birth:new RegExp(/^\d{4}[\-\/](((0?[13578])|(1[02]))[\-\/](([12][0-9])|(0?[1-9])|(3[01]))$|((0?[469])|11)[\-\/](([12][0-9])|(0?[1-9])|(30))$|(0?2)[\-\/](([12][0-9])|(0?[1-9]))$)/)
+    }
+    inputs.forEach((e,i)=>{
+        e.addEventListener('input',function(){
+            if(re[e.name].test(e.value)){
+                if(e.name=='birth'){
+                    if(e.value.includes('/')&&e.value.includes('-'))return
+                    if(e.value.includes('/')){
+                        var arr=e.value.split('/')
+                    }else{
+                        var arr=e.value.split('-')
+                    }       
+                    var y=arr[0] ,m=arr[1],d=arr[2]     
+                    if(!(m==2&&(!((y%4==0 && y%100!=0)||y%400==0))&&(d==29))&&((y<nowY)||(y==nowY&&m<nowM)||(y==nowY&&m==nowM&&d<=nowD))){                    
+                        e.className ='ok';  
+                        e.parentNode.querySelector('p').style.display='none' 
+                    }else{
+                        e.className = 'error';
+                        e.parentNode.querySelector('p').style.display='block' 
+                    }
+                }else{
+                    e.className = 'ok';  
+                    e.parentNode.querySelector('p').style.display='none' 
+                }                         
+            }else{
+                e.className = 'error';
+                e.parentNode.querySelector('p').style.display='block'
+            }
+
+            if(inputs.every(e=>(e.className=='ok'))){
+                btn.style.cursor='pointer';
+                btn.onclick=function(){
+                    window.location.href='http://www.baidu.com'
+                }
+            }
+        });
+    });
+
+</script>
+</body>
+</html>

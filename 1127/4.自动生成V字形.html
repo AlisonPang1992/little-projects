@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>自动生成100个Li</title>
+<style>
+	body,ul,li{margin:0; padding:0; font-family: "兰亭黑-简";}
+	#box{margin:0 auto; height:300px; width:250px; margin-top:50px;}
+	body {background: url(img/bg_1.jpg) no-repeat; background-size:100% ;}
+	input {margin:0 auto;}
+	button {margin:0 auto;}
+	span {font-size: 12px;}
+	li {list-style: none; vertical-align: top; height: 50px; width:50px; position:absolute; list-style:none;line-height: 50px;text-align: center;}
+	ul {position: relative; height:250px; width:250px; border: 1px solid #000; margin:0 auto;}
+	.text1 {width:30px;}
+</style>
+
+</head>
+
+<script>
+	window.onload = function(){
+	let Box= document.getElementById('box')
+	let oUl = document.getElementsByTagName('ul')[0]
+	let obtn = document.getElementsByTagName('button')
+	let Arr = ['red','yellow','blue','green']
+	var Text1 = document.getElementsByTagName('input')[0]
+	var k=0;var num=0; var j=0;
+	var Arr_p = ['top', 'left','bottom','right']
+	
+	obtn[0].onclick= function(){
+    var src = '';
+	j = Text1.value;
+	Box.style.cssText = 'height:'+(j*50+50)+'px; width:'+j*50+'px';
+	oUl.style.cssText = 'height:'+j*50+'px; width:'+j*50+'px';	
+		
+		
+	for(var i=0;i<j;i++){
+		
+		if(i<j/2){
+			src +='<li style="'+Arr_p[(k+1)%Arr_p.length]+':'+ i*50 +'px;'+ Arr_p[k%Arr_p.length]+':'+ i*50 +'px; background:'+Arr[i%(Arr.length-1)]+';" >'+ (i+1) +'</li>';
+		}else{ 
+			num++;
+			if (num>j/2){
+			num=1;}
+			src +='<li style="'+Arr_p[(k+1)%Arr_p.length]+':'+ i*50 +'px;'+ Arr_p[k%Arr_p.length]+':'+ ((j-i-1)*50) +'px;background:'+ Arr[i%(Arr.length-1)]+';">'+ (i+1) +'</li>';	   
+		}
+		}
+		oUl.innerHTML = src;
+		console.log(j);
+		k++;
+	}
+	}
+		
+</script>
+
+<body>
+<div id="box">
+<span>请输入方块个数:</span>
+<input class="text1" type="text" value="5">
+<button>开始生成V字形</button>
+<ul></ul>
+
+</div>
+</body>
+</html>

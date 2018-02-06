@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{margin:0;padding:0}
+        li{list-style: none;}
+        body{
+            background:-webkit-gradient(linear,0%50%, 100%50% ,from(#7790ca),to(#838bd2));
+        }
+
+        #box{
+            height:650px;background:#000;width:350px;
+            margin:30px auto 0px;
+            border-radius: 25px;
+            overflow: hidden;
+            position: relative;
+        }
+        .bg-1{
+            height:5px;width:50px;margin:24px auto 0; background: #fefefe;
+            display: block; border-radius: 5px;
+        }
+        .cir{
+            display: block;
+            position:absolute;
+            height:40px;
+            width:40px;
+            border-radius: 50%;
+            border:2px solid #404344;
+            bottom:20px; left:45%
+        }
+        .squ{
+            display:block;
+            width:20px;
+            height:20px;
+            border:2px solid #404344;
+            border-radius: 8px;
+            margin:8px auto;
+            
+        }
+        #content{
+            height:520px; width:300px;
+            margin:20px auto;
+            background: url(img/bg.jpg) no-repeat;
+            overflow: hidden;
+            color:#fff; 
+            font-size: 14px;
+        }
+        .Clk{
+            margin-top: 20px;
+            height:40px;
+            line-height: 40px;
+            display: block;
+        }
+        .Clk1{
+            margin-top: 20px;
+            height:40px;
+            line-height: 40px;
+            display: block;
+            background: rgba(220, 102, 132, 0.8);
+        }
+        .Clk2{
+            background: rgba(114, 49, 59, 0.8);
+        }
+        .Move{
+            background: rgba(91, 91, 91, 0.8);
+        }
+        li{
+            position: relative;
+            margin:0 auto;
+            height:34px;
+            width:220px;
+            line-height: 34px;
+            background: rgba(0, 0, 0, 0.8);
+            padding-left: 30px;
+            display: none;
+        }
+        #content .tran{
+            left:15px;
+            top:12px;
+            position: absolute;
+            border:7px solid #fff;
+            border-color: transparent transparent transparent rgb(255,255,255);
+        }
+        .listed{
+            left:7px;
+            top:16px;
+            position: absolute;
+            border:7px solid #fff;
+            border-color:rgb(255,255,255) transparent transparent transparent;  
+        }
+    
+    
+    </style>
+</head>
+<body>
+    <div id="box">
+        <span class="bg-1"></span>
+        <div id="content">
+            <ul>
+                    
+                <li class="Clk"><span class="tran"></span>我的好友</li>
+                <li>小佳Love</li>
+                <li>从来都是这么正经</li>
+                <li>leo是个胖子</li>
+                <li>momo不是陌陌</li>
+            </ul>
+
+            <ul>
+                <li class="Clk"><span class="tran"></span>企业好友</li>
+                <li>习近平</li>
+                <li>普京</li>
+                <li>奥巴马</li>
+            </ul>
+            <ul>
+                <li class="Clk"><span class="tran"></span>黑名单</li>
+                <li>安倍</li>
+                <li>杜特尔特</li>
+            </ul>
+
+        </div>
+        <div class="logo">
+            <span class="cir">
+                    <span class="squ"></span>
+            </span>
+            
+
+        </div>
+
+    </div >
+    <script>
+        var Clks=document.getElementsByClassName('Clk');
+        var Spans=document.getElementById('content').querySelectorAll('span');
+        var Clk_1 = document.getElementsByClassName('Clk1')
+        var Uls=document.querySelectorAll('ul');
+        var x=1;
+        var y=0;
+        
+        for(var i=0;i<Uls.length;i++){
+            
+            Clks[i].num=i;
+            Clks[i].sum=0;
+            Clks[i].onclick=function(){
+                if(Clk_1.length>=1){
+                var Lis1=Uls[y].querySelectorAll('li')
+                if(Clk_1[0]!=this){
+                Clk_1[0].className='Clk';
+                x=1;
+                Clks[y].sum=0;           
+                    Spans[y].className='tran'
+                    for(j=1;j<Lis1.length;j++){
+                        Lis1[j].className='';
+                        Lis1[j].style.display='none';
+                    }
+                }}
+                y=this.num;
+
+
+
+                
+                var Lis=Uls[this.num].querySelectorAll('li');
+                if(this.sum==0){
+                    this.className='Clk1'
+                    Spans[this.num].className='listed';
+                    this.sum=1;
+                    for(j=1;j<Lis.length;j++){ 
+                        Lis[j].index=j; 
+                        Lis[j].style.display='block';
+                        Lis[j].onmouseover=function(){
+                            if(this.className!='Clk2')
+                            this.className='Move'
+                        }
+                        Lis[j].onmouseout=function(){
+                            if(this.className!='Clk2')
+                            this.className=''
+                        }
+                        Lis[j].onclick=function(){
+                            Lis[x].className='';
+                            this.className='Clk2'
+                            x=this.index;
+                        }
+                    }
+
+                }else{
+                    this.sum=0;
+                    x=1;
+                    this.className='Clk';
+                    Spans[this.num].className='tran'
+                    for(j=1;j<Lis.length;j++){
+                        Lis[j].className='';
+                        Lis[j].style.display='none';
+                    }
+
+
+                }
+            }
+        }
+        
+        
+    
+    
+    </script>
+
+    
+</body>
+</html>

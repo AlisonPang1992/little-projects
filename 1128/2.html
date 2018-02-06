@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>无标题文档</title>
+<style>
+	body,ul,p{margin:0; padding:0; font-family: "兰亭黑-简";}
+	li{list-style: none; vertical-align: top;}
+	body{background: url(img/bg_1.jpg) no-repeat; overflow-x:hidden; background-size: 100%; }
+	.main {margin:0 auto; height:480px; width:850px; border-radius: 15px; margin-top:50px;background:#fff; overflow: hidden}
+	p {line-height: 68px; margin-left: 190px; background: url(img/logo.jpg) no-repeat; width:660px; height:68px; margin-top:60px;margin-bottom:60px; text-align: center; font-size: 28px; color:#d26d7c;}
+	.P1 {height:250px; width:850px;}
+	.first {height:150px; width:850px;background: #2f1d1f;border-bottom: 2px dotted #656167; line-height: 150px;overflow: hidden;}
+	.second {background: #2f1d1f; height:150px; line-height: 150px;overflow: hidden;}
+	.Hid {display: none;}
+	input {float:left; margin-top:60px; height:30px; width:300px; margin-left: 50px; font-size: 14px; color:#c1c1c1;border-radius: 8px;}
+	span {color:#c0bec2; font-size: 28px; text-indent: 50px; float: left; max-width: 500px; overflow:hidden;}
+	button,#btn1,#btn2 {font-size: 14px; background:#d26d7c;border:none; height:30px; width:50px; border-radius: 8px; float:left; margin-top:64px; margin-left: 6px; text-align: center;color:#fff;}
+	a {background: url(img/bg.jpg) no-repeat; display: inline-block; margin-top: 50px; margin-left: 20px; height:50px; width:50px;float: left;}
+
+	
+</style>
+</head>
+
+<body>
+<div class="main">
+	<p>课程分类</p>
+	<div class="first">
+
+		<span>欢迎来到妙味课堂</span>
+		<a href="javascript:;"></a>
+
+		<input class="Hid"  type="text" value="欢迎来到妙味课堂">
+		<input class="Hid"  id="btn1" type="button" value="确认">
+		<button class="Hid" >取消</button>
+
+
+	</div>
+	<div class="second">
+
+		<span>欢迎来到妙味课堂</span>
+		<a href="javascript:;"></a>	
+
+		<input class="Hid" type="text" value="欢迎来到妙味课堂">
+		<input class="Hid" id="btn2" type="button" value="确认">
+		<button class="Hid">取消</button>
+
+		
+	</div>
+
+</div>
+<script>
+	var As = document.querySelectorAll('a');
+	var Spans = document.querySelectorAll('span');
+	var Inputs = document.querySelectorAll('input[type="text"]');
+	var Btns1 = document.querySelectorAll('input[type="button"]');
+	var Btns2 = document.querySelectorAll('button');
+	
+
+
+	for(let i=0; i<As.length; i++){
+		As[i].num = i ;
+			 function Show1(){
+					As[i].className ='';
+					Spans[As[i].num].className ='';
+			
+					Inputs[As[i].num].className ='Hid';
+					Btns1[As[i].num].className ='Hid';
+					Btns2[As[i].num].className ='Hid';
+			 	}	 
+	        function Show2(){
+					As[i].className ='Hid';
+					Spans[As[i].num].className ='Hid';
+			
+					Inputs[As[i].num].className ='';
+					Btns1[As[i].num].className ='';
+					Btns2[As[i].num].className ='';
+				}
+		var str = '';
+		As[i].onclick = function(){
+			Show2();
+			Btns1[this.num].onclick = function (){
+		
+				str = Inputs[As[i].num].value ;
+				if(str ==''){
+					alert('请输入文字')
+				}else{
+					Spans[As[i].num].innerHTML = str;
+					Show1();
+			}
+			}
+			Btns2[this.num].onclick = function(){
+				Inputs[As[i].num].value = str;
+				Show1();
+			}
+		}
+
+
+			
+	}
+
+	
+	
+	
+	
+	
+</script>
+
+
+</body>
+</html>

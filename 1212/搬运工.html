@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <style>
+        body{background: #6a63c0;}
+        #box{height:600px;width:830px;margin:80px auto 0;}
+        #text1,#show1{height:600px;width:350px;background: #edf8f9;border-radius: 15px;float: left;
+                      }
+        #btn{height:60px; width:100px;background: #8adef9; border-radius: 7px;color:#fff; }
+        #text,#show{display:block;width:310px; height: 560px;margin-top: 20px;margin-left: 20px;border:none;background: 0 0;
+            font-size: 16px;color:#6d63a7;line-height: 25px;overflow-x: hidden; word-break:break-all; outline: 0;   resize: none;}
+        .Content{color:#8ad0f0;margin-top: 20px;display: block;}
+        .arrow{float:left;height:100px;width:100px;margin: 250px 10px 250px 10px ;text-align: center; line-height: 20px;
+            font-size: 16px;overflow: hidden;}   
+    </style>
+</head>
+<body>
+    <div id="box">
+        <!-- <input type="text"  id="text"> -->
+
+        <div id="text1">
+            <textarea id="text"></textarea>
+        </div>
+        <div class="arrow">
+            <div id="btn">
+                <span class="fa fa-long-arrow-right fa-2x"></span>
+                <br />
+                把文字右移
+            </div>
+            <span class="Content">0/0</span>
+        </div>
+
+        <div id="show1">
+            <div id="show"></div>
+        </div>
+    </div>
+
+    <script>
+        var Inputs=document.getElementById('text');
+        var Btns=document.getElementById('btn');
+        var Show=document.getElementById('show');
+        var Contents=document.getElementsByClassName('Content')[0];
+        var timer=0;
+        var onoff=0;
+        
+        Btns.onclick = function(){
+            if(onoff==0){
+                onoff=1;
+           var val=Inputs.value;
+           var num=val.length;
+           var num1=0;
+           Contents.innerText='0/0';
+           Show.innerHTML='';
+           
+           timer=setInterval(function(){
+               num1=Show.innerHTML.length;
+               Contents.innerHTML =num1+'/'+num;
+               if(Inputs.value==0){clearInterval(timer);onoff=0;}
+                Show.innerHTML+=val.substr(0,1);               
+               console.log(Show)
+               val=val.substr(1);
+               Inputs.value=val  
+               console.log(val)         
+           },20) 
+        }        
+        }
+    </script>
+
+</body>
+</html>

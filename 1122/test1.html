@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>设置DIV样式</title>
+
+<style>
+	li{list-style: none; vertical-align: top;}
+	ul,li,body,p{margin:0; padding:0;}
+	#input_set {height:100px;}
+	strong {font-size: 30px; line-height: 100px; float: left}
+	#input {height: 40px; width:100px; border:none; color:#fff; font-size: 16px;background:red; float:left; margin-top: 30px; margin-left: 20px;}
+	#div1 {height:100px; width:100px; border: 5px solid black; transition: 500ms;}
+	.content ul li {height:40px; padding-top:7px;  margin-left: 6px;}
+	.content ul li li,.content ul li li div,p,.content ul li li div span{float:left;}
+	.content ul li ul {float:right; margin-right: 6px;}
+	.content ul li p {margin-top:16px;}
+	.content ul li li div {border: 1px solid gray; margin-left: 4px;height: 30px;width:30px; color:gray; background:#E3DBDB; align-content: center;}
+	.content ul li li div:hover {cursor: pointer;}
+	.content ul li li div span  {height: 30px; width:30px; text-align: center; line-height: 30px; font-size: 12px;}
+	#color div {border: none; color:#fff;}
+	#red_g {background:#C6F068;}
+	#blue_g {background:#64D0D8;}
+	#yellow_g {background:#F2B72F;}
+	#color div {margin-right: 2px;}
+	body {position:relative;} 
+	.content {margin: 0 auto; width: 238px; margin-top: 24px; background: #fff; height:190px;}
+	#text1 {position: absolute; top: 170px; left: 500px;; background:#E9DFF4; height: 236px; width:280px; display:none;}	
+	li button {border: none; color: #fff; background: #510EE4; height: 30px;line-height: 30px; width: 50px; margin-left: 40px;}
+</style>
+
+<script>
+window.onload = function (){
+	const oinput = document.getElementById('input');
+	const otext1 = document.getElementById('text1');
+	const orefresh = document.getElementById('refresh');
+	const osure = document.getElementById('sure');
+	const odiv1 = document.getElementById('div1');
+	const oobody = document.getElementById('obody');
+	const ored_g = document.getElementById('red_g');
+	const oblue_g = document.getElementById('blue_g');
+	const oyellow_g = document.getElementById('yellow_g');
+	const ow_200 = document.getElementById('w_200');
+	const ow_300 = document.getElementById('w_300');
+	const ow_400 = document.getElementById('w_400');
+	const oh_200 = document.getElementById('h_200');
+	const oh_300 = document.getElementById('h_300');
+	const oh_400 = document.getElementById('h_400');
+	oinput.onclick = function (){
+		otext1.style.display = 'block';
+		oobody.style.background = '#C1C1C1';
+        odiv1.style.opacity = '0.8'
+			orefresh.onclick = function (){
+		        odiv1.style.cssText = '';
+	        }
+			osure.onclick = function (){
+				otext1.style.display = 'none';
+				oobody.style.background = '';
+				odiv1.style.opacity = '1'
+			}
+			ored_g.onclick = function (){
+				odiv1.style.background = 'red';
+			}
+			oyellow_g.onclick = function (){
+				odiv1.style.background = 'yellow';
+			}
+			oblue_g.onclick = function (){
+				odiv1.style.background = 'blue';
+			}
+			ow_200.onclick = function (){
+				odiv1.style.width = '200px';
+			}
+			ow_300.onclick = function (){
+				odiv1.style.width = '300px';
+			}
+			ow_400.onclick = function (){
+				odiv1.style.width = '400px';
+			}
+			oh_200.onclick = function (){
+				odiv1.style.height = '200px';
+			}
+			oh_300.onclick = function (){
+				odiv1.style.height = '300px';
+			}
+			oh_400.onclick = function (){
+				odiv1.style.height = '400px';
+			}
+	}
+	}	
+</script>
+
+</head>
+
+<body id="obody">
+<div id="main">
+     <div id="input_set">
+        <strong>请为下面的DIV设置样式:</strong>
+        <input id="input" type="button" value="点我设置">
+     </div>
+     <div id="div1">
+	 </div>
+</div> 
+<div id="text1" >
+	<div class="content">
+		<ul>
+			<li>
+				<p>请选择背景色:</p>
+				 <ul>
+				 	<li id="color" >
+				 		<div id="red_g">
+				 			<span>红</span>
+				 		</div>
+				 		<div id="yellow_g">
+				 			<span>黄</span>
+				 		</div>
+				 		<div id="blue_g">
+				 			<span>蓝</span>
+				 		</div>
+				 	</li>
+				</ul>
+			</li>
+			<li>
+				<p>请选择宽(px):</p>
+				 <ul>
+				 	<li>
+				 		<div id="w_200">
+				 			<span>200</span>
+				 		</div>
+				 		<div id="w_300">
+				 			<span>300</span>
+				 		</div>
+				 		<div id="w_400">
+				 			<span>400</span>
+				 		</div>
+				 	</li>
+				 </ul>
+			</li>
+			<li>
+				<p>请选择高(px):</p>
+				 <ul>
+				 	<li>
+				 		<div id="h_200">
+				 			<span>200</span>
+				 		</div>
+				 		<div id="h_300">
+				 			<span>300</span>
+				 		</div>
+				 		<div id="h_400">
+				 			<span>400</span>
+				 		</div>
+				 	</li>
+				 </ul>
+			</li>
+			<li>
+                <button id="refresh">重置</button> 
+				<button id="sure">确定</button>		
+			</li>
+		</ul>
+	</div>
+</div>  
+</body>
+</html>

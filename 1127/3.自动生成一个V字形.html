@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>自动生成100个Li</title>
+<style>
+	body,dl,dd,ul,p,h1,h2,h3,a{margin:0; padding:0; font-family: "兰亭黑-简";}
+li{list-style: none; vertical-align: top;}
+	li {height: 50px; width:50px; position:absolute; list-style:none; }
+	ul {position: relative;}
+</style>
+
+</head>
+
+<script>
+	window.onload = function(){
+	let oUl = document.getElementsByTagName('ul')
+	let obtn = document.getElementsByTagName('button')
+	let Arr = ['red','yellow','blue','green']
+	let aLi = document.getElementsByTagName('li')
+	var k=0;var num=0;
+	obtn[0].onclick= function(){
+	for(var i=0,j=0;i<5;i++,j++){
+		if(j>3){
+			j=0;
+		}
+		oUl[0].innerHTML += '<li>'+ i +'</li>';
+		
+		aLi[i+k*5].style.left = i*50 +'px';
+		if(i<3){
+		aLi[i+k*5].style.top =i*50+k*150 +'px';
+		}else{ num++;
+			if (num>2){
+			num=1;}
+		aLi[i+k*5].style.top = 100+k*150-num*50+'px';
+	   
+		}
+		aLi[i+k*5].style.backgroundColor =Arr[j];
+		console.log(aLi[i+k*5]);
+		}
+		k++;
+				
+	}
+		
+				
+	}
+		
+</script>
+
+<body>
+<button>自动生成1个V字形</button>
+<ul></ul>
+</body>
+</html>

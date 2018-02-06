@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>无标题文档</title>
+<style>
+	body,p,a,button{margin:0; padding:0; font-family: "兰亭黑-简";}
+	a{text-decoration: none;}
+	a:hover{text-decoration: none;}
+	img{border:none;}
+	
+	body {background:url(img/bg_1.jpg) no-repeat;background-size:100%;}
+	.img_p1 {color:#fff;}
+	.logo {float:right; margin-top: 260px;margin-right: 10px;}
+	.btn1 {width:630px;height:50px;}
+	.btn {margin-left: 164px; border-right:none; background:#f7f6f6; color: #000 }
+	button { margin-top: 10px; border:2px solid #f7f6f6; background:#000; color:#f7f6f6; height: 40px; width: 150px; font-size: 18px; line-height: 30px; float:left; }
+	#content {margin-left:40px;float:left; width:630px; height:510px; margin-top:30px; border: 3px solid #000; border-radius: 5px; background:#000;}
+	.main {margin:0 auto;width:750px; height:600px; background:#e5e3eb; margin-top:50px; border-radius: 15px;}
+	.P1 {width:630px; height:40px; line-height: 40px; color:#b4b3b7; text-align: center; font-size: 16px;}
+	.Img_box {position:relative; margin-left: 5px; height: 420px; width:620px;}
+	#Img { position:absolute; height: 420px; width:620px;}
+	.img_p1 {position: absolute; top:0px; line-height: 30px; width:620px; text-align: center; color:#000;font-size: 18px;; z-index: 2}
+	.img_p2 {position: absolute;line-height: 30px;height:30px;  bottom:0px; width:620px; text-align: center; color:#000;font-size: 18px;; z-index: 2;background:#fec5c5; opacity: 0.3;}
+	a {width: 60px; height: 60px; background-color: #fff; opacity: 0.3; display: block; color: #000; font-size: 48px; line-height: 60px; position: absolute;text-align: center; top:180px;}
+	a:link,a:active,a:visited{text-decoration: none;}
+	a:hover{opacity: 0.7;}
+	.a1 {right:0px;}
+</style>
+
+<script>
+	window.onload = function (){
+		var A1 = document.getElementsByTagName('a');
+		var P2 =  document.getElementsByTagName('p');
+		var Btn =document.getElementsByTagName('button');
+		var Img_1 = document.getElementById('Img')
+		var Arr_img =[
+			"img/spring.jpg",
+			"img/summer.jpg",
+			"img/autumn.jpg",
+			"img/winter.jpg"
+		];
+		var Arr_p = [
+			'春','夏', '秋', '冬'
+		];
+	    var i=0;
+		var num= Arr_img.length-1;
+		function cycle(){
+			A1[0].onclick = function (){
+			 	i--;
+				if(i<0) {
+					i=num;
+				}
+				Img_1.src = Arr_img[i];
+				P2[1].innerText =(i+1)+ '/'+ (num+1);
+				P2[2].innerText = '猫咪四季之' + Arr_p[i];
+			}
+			A1[1].onclick = function (){
+				i++;
+				if(i>num) {
+					i=0;
+				}
+				Img_1.src = Arr_img[i];
+				P2[1].innerText =(i+1)+ '/'+ (num+1);
+				P2[2].innerText = '猫咪四季之' + Arr_p[i];
+				
+			}
+			
+		}
+		cycle();
+		P2[1].innerText =(i+1)+ '/'+ (num+1);
+		Btn[0].onclick = function (){
+			Btn[0].style.cssText = 'background:#f7f6f6; color: #000;';
+			Btn[1].style.cssText = 'background:#000; color: #f7f6f6;';
+			P2[0].innerText = '图片可以从最后一张跳转到第一张循环切换';
+			cycle();
+		}
+		Btn[1].onclick = function (){
+			Btn[1].style.cssText = 'background:#f7f6f6; color: #000;';
+			Btn[0].style.cssText = 'background:#000; color: #f7f6f6;';
+			P2[0].innerText = '图片只能到从最后一张或者到第一张切换';
+			A1[0].onclick = function (){
+				i--;
+				if(i<0) {
+					i=0;
+				}
+				Img_1.src = Arr_img[i];
+				P2[1].innerText =(i+1)+ '/'+ (num+1);
+				P2[2].innerText = '猫咪四季之' + Arr_p[i];
+			}
+			A1[1].onclick = function (){
+				i++;
+				if(i>num) {
+					i=num;
+				}
+				Img_1.src = Arr_img[i];
+				P2[1].innerText =(i+1)+ '/'+ (num+1);
+				P2[2].innerText = '猫咪四季之' + Arr_p[i];
+				
+			}
+			
+		}
+	}
+</script>
+
+
+
+
+</head>
+ 
+<body>
+	<div class="main">
+	    <img class="logo" src="img/miaov.png" />
+
+		<div id="content" >
+	    	<div class="btn1">
+				<button class="btn">循环切换</button>
+				<button>顺序切换</button>
+
+		    </div>
+		    <div class="P1">
+	        	<p>图片可以从最后一张跳转到第一张循环切换</p>
+	        </div>
+	        
+		    <div class="Img_box">
+		    	<img id="Img" src="img/spring.jpg" />
+				<p class="img_p1"></p>
+				<a href="javascript:;"><</a>
+				<a class="a1" href="javascript:;" >></a>
+				<p class="img_p2">猫咪四季之春</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

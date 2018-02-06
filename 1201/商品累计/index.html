@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body,
+			ul,
+			li {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="price.css" />
+	</head>
+
+	<body onselectstart="return false;">
+		<div class="wrap">
+			<div class="box">
+				<ul class="list">
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>12.5元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>10.5元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>8.5元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>8元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+					<li>
+						<i></i>
+						<em>0</em>
+						<i></i>
+						<span>
+							单价：<strong>14.5元 </strong> 小计：<strong>0元</strong>
+						</span>
+					</li>
+				</ul>
+				<div class="info">
+					<span>商品共合计：<em>0</em>件</span>
+					<span>共花费了：<em>0</em>元</span>
+					<br />
+					<br />
+					<span>其中最贵的商品单价是：<em>0</em>元</span>
+				</div>
+			</div>
+		</div>
+		
+		
+		<script>
+			var Lis = document.querySelectorAll('li');
+			var Ems = document.getElementsByClassName('info')[0].querySelectorAll('em');
+			var Arr =[]; 
+			for(var i =0; i<Lis.length; i++){
+				var  oI = Lis[i].querySelectorAll('i');
+				Arr[i] = 0;
+				oI[0].num=oI[1].num=i;
+				oI[0].onclick= function(){
+					Arr[this.num]=Del(Lis[this.num],Arr[this.num]);
+					var Ret=Su(Arr);
+					Ems[0].innerText=Ret[0];
+					Ems[1].innerText=Ret[1];
+					Ems[2].innerText=Ret[2];
+				}
+				oI[1].onclick= function(){
+					Arr[this.num]=Add(Lis[this.num],Arr[this.num]);
+					var Ret=Su(Arr);
+					Ems[0].innerText=Ret[0];
+					Ems[1].innerText=Ret[1];
+					Ems[2].innerText=Ret[2];
+				}
+			}
+			
+			function Su(Arr=[]){
+				var sum=0,money=0,max=0;
+				for(var i=0;i<Arr.length;i++){
+					var  Strongx = Lis[i].querySelectorAll('strong');
+					sum+=Arr[i];
+					money+=Arr[i]*parseFloat(Strongx[0].innerText);
+					if(Arr[i]!=0&&parseFloat(Strongx[0].innerText)>max){max=parseFloat(Strongx[0].innerText);}
+				}
+				return [sum,money,max];
+			}
+			
+			function Del(Lix,num){
+				var  Strongx = Lix.querySelectorAll('strong');
+				var  Emx = Lix.querySelector('em');
+				num--;
+				if(num<0){
+					num=0;
+				}
+				Emx.innerText = num;
+				Strongx[1].innerText=parseFloat(Strongx[0].innerText)*num +'元';
+				return num;
+			}
+			function Add(Lix,num){
+				var  Strongx = Lix.querySelectorAll('strong');
+				var  Emx = Lix.querySelector('em');
+				num++;
+				Emx.innerText = num;
+				Strongx[1].innerText=parseFloat(Strongx[0].innerText)*num +'元';
+				return num;
+			}
+		</script>
+		
+		
+	</body>
+
+</html>

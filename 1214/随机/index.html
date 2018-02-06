@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="css/index.css" rel="stylesheet" />
+	</head>
+	<body>
+		<section id="wrap">
+			<header id="head">
+				<img src="img/logo.png"/>
+				<div id="btn" class="clearfix">
+					<span class="active">从小到大</span>
+					<span>打乱顺序</span>
+				</div>
+			</header>
+			<article id="cons">
+				<ul class="list clearfix">
+				</ul>
+			</article>
+		</section>
+		<script src="js/data.js"></script>
+		<script>
+
+			var Btn=document.getElementById('btn');
+			var Spans=document.querySelectorAll('span');
+			var oUl=document.querySelector('ul');
+			var Lis=document.querySelectorAll('li');
+			var num=0;
+
+
+			Spans[0].onclick=function (){
+
+				
+				oUl.innerHTML='';
+				data.forEach(function(e,i){
+					var arr2=e.text.split('');
+						arr2[0]=e.url[(e.url).indexOf('.')-1];	
+						console.log((e.url).indexOf('.'))									
+					e.text=arr2.join('');
+				})
+
+
+
+				if(num==0){				
+				data.sort(function(a,b){
+						return parseInt(a.text)- parseInt(b.text);
+					})
+					console.log(data)
+					for(var i=0;i<data.length;i++){
+						oUl.innerHTML+='<li><img src="'+data[i].url + '"><p>'+data[i].text+'</p></li>';
+					}
+					Spans[0].innerText='从大到小';
+					num=1
+
+				}else{					
+					console.log(2)				
+					data.sort(function(a,b){
+						return parseInt(b.text)- parseInt(a.text);
+					})
+					for(var i=0;i<data.length;i++){
+						oUl.innerHTML+='<li><img src="'+data[i].url + '"><p>'+data[i].text+'</p></li>';
+					}
+					console.log(data)
+					Spans[0].innerText='从小到大';
+					num=0
+				}
+			}
+
+			Spans[1].onclick = function(){
+				oUl.innerHTML='';	
+				var j=data[0].text[0];
+				data.sort(function(){
+						return Math.random()-0.5;
+				})
+
+				data.forEach(function(e,i){
+					var arr2=e.text.split('');
+					if(j==1){
+						arr2[0]=i+1;
+					}else{
+						arr2[0]=data.length-i;
+					}
+										
+					e.text=arr2.join('');
+				})
+				for(var i=0;i<data.length;i++){
+						oUl.innerHTML+='<li><img src="'+data[i].url + '"><p>'+data[i].text+'</p></li>';
+				}
+			}
+	
+		</script>
+	</body>
+</html>

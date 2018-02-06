@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <select name="" id="select">
+        <option value="13">回车</option>
+        <option value="Shift+13">Shift+回车</option>
+        <option value="ALt+13">Alt+回车</option>
+        <option value="Shift+Alt+13">Shift+Alt+回车</option>
+    </select>
+    <input type="text" id='text'>
+    <ul id='ul'>
+        
+    </ul>
+    <script>
+        var Ul=document.getElementById('ul');
+        var Select=document.getElementById('select');
+        var Text1=document.getElementById('text');
+        var v=Select.value;
+        function creat(_this){
+            var li=document.createElement('li');
+                    li.innerText=Text1.value;
+                    if(Text1.value=='')return;
+                    Ul.insertBefore(li,Ul.children[0]);
+                    _this.value='';
+        }
+        
+        Text1.onkeyup=function(ev){
+            v=Select.value
+            switch(v){
+                case '13':if(ev.keyCode==13&&!ev.shiftKey && !ev.altKey)creat(this);break;
+                case 'Shift+13':if(ev.keyCode==13 && ev.shiftKey && ev.altKey==false)creat(this);break;
+                case 'ALt+13':if(ev.keyCode==13 && ev.altKey&& ev.shiftKey==false)creat(this);break;
+                case 'Shift+Alt+13':if(ev.keyCode==13 && ev.shiftKey && ev.altKey)creat(this);break;
+            }
+        }   
+    </script>
+    
+</body>
+</html>

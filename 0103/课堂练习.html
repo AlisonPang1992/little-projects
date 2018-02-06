@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .box{
+            position: absolute;
+            top:0;
+            left: 0;           
+        }
+    </style>
+</head>
+<body id='body'>
+    <img src="wenjian.png" class="box" height="100px">   
+    <script>
+    var obox=document.getElementsByTagName('img')[0];
+    var bX=0,bY=0,l=0,t=0;
+    
+    obox.addEventListener('mousedown',function(ev){
+       var cbox=obox.cloneNode(true);
+       cbox.style.opacity=0.5;
+       body.appendChild(cbox);
+       bX=ev.pageX-cbox.offsetLeft;
+       bY=ev.pageY-obox.offsetTop;
+
+       document.addEventListener('mousemove',move)
+       document.addEventListener('mouseup',up)
+
+        function move(ev){
+            l=ev.pageX-bX;
+            t=ev.pageY-bY;
+            cbox.style.left=l+'px';
+            cbox.style.top=t+'px';
+        }
+
+        function up(ev){
+            obox.style.top=t+'px';
+            obox.style.left=l+'px';
+            cbox.remove()
+            document.removeEventListener('mousemove',move);
+            document.removeEventListener('mouseup',up);
+        }
+        ev.preventDefault()
+    }) 
+    </script> 
+</body>
+</html>

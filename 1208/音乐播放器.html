@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        body{
+            background:-webkit-gradient(linear,0%50%, 100%50% ,from(#29212e),to(#b05974));
+        }
+        li{list-style: none;}
+        #box{
+            height:580px;
+            width:800px;
+            margin:50px auto 0;
+            border-radius: 15px 15px 0 0;
+            background:#fff;
+        }
+        #content ul{
+            width:800px;
+            padding:20px 0;
+            margin:30px auto 0;
+            font-size: 20px;
+        }
+        #content li{
+            height:80px;
+            width:800px;
+            line-height: 80px;
+        }
+        #footer{
+            height:60px;
+            width:800px;
+            background:#ce5565;
+            font-size: 20px;
+            line-height: 60px;
+        }
+        .music,#footer span{
+            margin-left: 10px;
+
+           
+        }
+        .singer{
+            float:right;
+            margin-right: 20px;
+        }
+        #content li input,#footer input{
+            display: inline-block;
+            height:24px;
+            width:24px;
+            border:none;
+            margin-left: 20px;
+            background: none;
+        }
+        li:hover,.check{
+            background:#d87182;
+            color:#fff;
+        }
+        #content label{
+            display: block;
+            height:80px;
+        }
+        /* lable:nth-child(2n){
+            background: #fff;
+        }         */
+        #content label:nth-child(2n){
+            background: #efc7ce;
+        }
+        #footer span{
+            color:#fff;
+            font-size: 20px;
+            margin-right: 110px;
+        }
+        #footer i{
+            font-size: 26px
+
+        }
+
+        
+
+    
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div id="content">
+            <ul>
+                <label>
+                    <li>                          
+                        <input type="checkbox">
+                        <span class="music">泡沫</span>
+                        <span class="singer">邓紫棋</span>                          
+                    </li>
+                </label>                
+                <label>
+                    <li>                           
+                        <input type="checkbox">
+                        <span class="music">说爱你</span>
+                        <span class="singer">蔡依林</span>                           
+                    </li>
+                </label>                
+                <label>
+                    <li>                           
+                        <input type="checkbox">
+                        <span class="music">我的梦</span>
+                        <span class="singer">张靓颖</span>                          
+                    </li>
+                </label>                
+                <label>
+                    <li>                           
+                        <input type="checkbox">
+                        <span class="music">稻香</span>
+                        <span class="singer">周杰伦</span>                         
+                    </li>
+                </label>                
+                <label>
+                    <li>                         
+                        <input type="checkbox">
+                        <span class="music">怎么说我不爱你</span>
+                        <span class="singer">萧敬腾</span>                           
+                    </li>
+                </label>                
+                <label>
+                    <li>                        
+                        <input type="checkbox">
+                        <span class="music">无处安放</span>
+                        <span class="singer">白若溪</span>                          
+                    </li>
+                </label>
+            </ul>
+        </div>
+        <div id="footer">
+            <label>
+                <input type="checkbox" >
+                <span>全选</span>
+            </label> 
+            <i class="fa fa-heart-o fa-inverse"></i>
+            <span>收藏</span>              
+            <i class="fa fa-plus-circle fa-inverse"></i>
+            <span>添加</span>              
+            <i class="fa fa-trash fa-inverse"></i>
+            <span>删除</span>  
+
+                
+
+
+        </div>
+    </div>
+
+    <script>
+        var Lis= document.querySelectorAll('li');
+        var Checks= document.querySelectorAll('input[type="checkbox"]');
+        var oLabel=document.getElementById('footer').querySelector('label');
+        var len=Lis.length;
+        var len1=Checks.length;
+        
+        for(var i=0;i<len;i++){
+            Lis[i].num=i;
+            Lis[i].onclick=function(){
+                if(Checks[this.num].checked==true){
+                    Lis[this.num].className ='check';                     
+                    for(var j=0;j<len;j++){
+                        if(Checks[j].checked==false)break;
+                        if(j==len-1){Checks[len].checked=true}                        
+                    }
+                }
+                if(Checks[this.num].checked==false){
+                    Lis[this.num].className ='';
+                    for(var j=0;j<len;j++){
+                        if(Checks[j].checked==false)Checks[len].checked=false                   
+                    }
+                }                                   
+            }
+        }
+        oLabel.onclick=function(){
+           
+            if(Checks[len1-1].checked==true){
+                for(i=0;i<len;i++){ 
+                    Checks[i].checked=true;
+                    Lis[i].className='check';
+                } 
+            }else{
+                for(i=0;i<len;i++){
+                    Checks[i].checked=false;
+                    Lis[i].className=''; 
+                }
+            }
+        }
+        
+
+
+
+
+    
+
+
+
+
+
+
+    
+    </script>
+    
+</body>
+</html>

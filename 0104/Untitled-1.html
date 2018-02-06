@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            position: absolute;
+            left:0;
+            top:0;
+            border:1px solid blue;
+            background: skyblue;
+            opacity: 0.5;
+            height: 0px;
+            width: 0px;
+        }
+        li{
+            list-style: none;
+            height:100px;
+            width:100px;
+            float: left;
+            margin-right: 100px;
+            background: yellow
+
+        }
+        .aceive{
+            height: 80px;
+            width: 80px;
+            border: 10px solid yellowgreen;
+            background: yellow;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body id='body'>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+<script>
+    var body=document.getElementById('body');
+
+    document.onmousedown=function(ev){
+        var box=document.createElement('div')
+        box.id='box';
+        body.appendChild(box);
+        var x=ev.pageX;
+        var y=ev.pageY;
+        document.onmousemove=function(ev){
+            var w=Math.abs(ev.pageX-x);
+            var h=Math.abs(ev.pageY-y);
+            var t=Math.min(ev.pageY,y);
+            var l=Math.min(ev.pageX,x);
+            box.style.width=w+'px';
+            box.style.height=h+'px';
+            box.style.top=t+'px';
+            box.style.left=l+'px';
+        }
+        document.onmouseup=function(ev){
+            box.remove();
+            document.onmousemove=document.onmouseup=null;
+        }
+        return false;
+    }
+
+    // function bang(obj,who){
+    //     var ol=obj.
+
+
+
+    // }
+
+</script>
+    
+</body>
+</html>

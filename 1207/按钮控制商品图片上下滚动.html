@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        li{list-style: none;}
+        #header{
+            width: 300px;
+            height:30px;
+            background:#475a78;
+            margin:30px auto 0;
+            border-radius: 15px 15px 0 0;     
+        }
+        #header p,#header a{
+            font-size: 16px; color:#fff; line-height: 30px;
+        }
+        #header p{
+            float:left;margin-left: 20px; 
+        }
+        #header a{
+            text-decoration: none; float:right;margin-right: 20px;
+        }
+        #box{
+            width:296px;
+            height: 600px;
+            border: 2px solid #dbe0e0;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        .down{
+            border:none;
+            position:absolute;
+            top:0;
+            width:296px;height:20px;
+            background: #efefe8 url(img/down.jpg) no-repeat 132px 2px;
+            z-index: 3;
+        }
+        .up{
+            border:none;
+            position:absolute;
+            bottom:0;
+            width:296px;height:20px;
+            background: #efefe8 url(img/up.jpg) no-repeat 132px 2px;
+            z-index: 3;
+        }
+        img{
+            height:100px;
+            width:160px; 
+            float:right;margin-top:30px;
+        }
+        ul{position: absolute;
+        top:0px;
+            
+        }
+        li{
+            height:160px; 
+            width:256px;
+            margin:0px 20px;
+            border-bottom: 2px solid #dbe0e0;
+        }
+        .content{float:left;
+        margin-top: 30px;
+    width:94px;}
+        
+
+
+    
+    
+    
+    
+    </style>
+</head>
+<body>
+    <div id="header">
+        <p>妙味课堂</p>
+        <a href="javascript:;">>>更多</a>
+    </div>
+    
+    <div id="box">
+        <button class="down"></button>
+        <ul>
+            <li>
+                <div class="content">
+                    <h3>标题1</h3>
+                    <p>图片描述:图片1</p>
+                </div>
+                <img src="img/1.jpg" alt="">
+            </li>
+            <li>
+                    <div class="content">
+                            <h3>标题2</h3>
+                            <p>图片描述:图片2</p>
+                        </div>
+                    <img src="img/2.jpg" alt="">
+            </li>
+            <li>
+                    <div class="content">
+                            <h3>标题3</h3>
+                            <p>图片描述:图片3</p>
+                        </div>
+                    <img src="img/3.jpg" alt="">
+            </li>
+            <li>
+                    <div class="content">
+                            <h3>标题4</h3>
+                            <p>图片描述:图片4</p>
+                        </div>
+                    <img src="img/4.jpg" alt="">
+            </li>
+            <li>
+                    <div class="content">
+                            <h3>标题5</h3>
+                            <p>图片描述:图片5</p>
+                        </div>
+                    <img src="img/5.jpg" alt="">
+            </li>
+            <li>
+                    <div class="content">
+                            <h3>标题6</h3>
+                            <p>图片描述:图片6</p>
+                        </div>
+                    <img src="img/6.jpg" alt="">
+            </li>
+            <li>
+                    <div class="content">
+                        <h3>标题7</h3>
+                        <p>图片描述:图片7</p>
+                    </div>
+                    <img src="img/7.jpg" alt="">
+            </li>
+        </ul>
+        <button class="up"></button>
+    </div>
+    <script>
+        var timer=null;
+        var num=0;
+        var oUl=document.querySelectorAll('ul')[0];
+        var Box=document.getElementById('box');
+        var Hei=oUl.offsetHeight;
+        console.log(Hei)
+        Btns=document.querySelectorAll('button');
+        Btns[0].onmousedown = function(){
+            timer = setInterval(function(){
+                num--;
+                if(num<(-Hei+Box.offsetHeight)){num=(-Hei+Box.offsetHeight);}
+                oUl.style.top=num+'px';
+                console.log(Hei,Box.offsetHeight)
+            },1)}
+        document.onmouseup = function(){
+
+            clearInterval(timer);
+        }        
+        Btns[1].onmousedown = function(){
+        timer = setInterval(function(){
+            num++;
+            if(num>0){num=0;}
+            oUl.style.top=num+'px';
+        },1)}
+
+
+    
+    
+    </script>
+    
+</body>
+</html>

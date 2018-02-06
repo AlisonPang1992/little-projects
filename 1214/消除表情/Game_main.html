@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Game_main</title>
+<link rel="stylesheet" href="style/Game_main.css">
+</head>
+<body>
+<div id="wrap">
+	<div class="head">
+		<div id="log"></div>
+		<h3 class="title">你的鼠标有多快?</h3>
+		<p class="explain">游戏说明：“点击游戏”，随机掉下表情点中它，千万别让它掉下去！！</p>
+	</div>
+	<div class="content">
+		<div class="win">
+			<span class="winNum">0分</span>
+			<p>得分</p>
+		</div>
+		<div class="lose">
+			<span class="loseNum">0分</span>
+			<p>失分</p>
+		</div>
+		<a href="javascript:;" class="btn">开始游戏</a>
+		<div id="imgs"></div>
+		<div id="gameover">
+			<p>Game Over</p>
+			<span></span>
+		
+		</div>
+
+	</div>
+</div>
+<script>
+
+	var Win=document.getElementsByClassName('win')[0];
+	var Lose=document.getElementsByClassName('lose')[0];
+	var Content=document.getElementsByClassName('content')[0];
+	var Img2=document.getElementById('imgs')
+	var Gameover=document.getElementById('gameover')
+	var Nums=Content.querySelectorAll('span');
+	var Start=document.querySelector('a');
+	var timer=null,timer2=null;
+	var topnum=0;
+	var losen=0,winn=0;	
+	var add=0,onoff=true,onoff2=true;
+	var data=['demonI.png','demonII.png','demonIII.png','demonIV.png','demonV.png','demonVI.png']
+
+	Start.onclick=function(){
+		
+		Show();
+		drop();
+		timer2=setInterval(function(){					
+			drop();						
+		},3500-add*400)
+		
+	}
+
+	function drop(){
+		if(losen>=3){
+			clearInterval(timer2)
+				Hidden();
+				Nums[2].innerText='很遗憾！你已经失去了三分';
+				return;
+			}
+			if((winn+losen)>=20){
+				clearInterval(timer2)
+				Hidden();
+				Nums[2].innerText='恭喜你，总分20，你共获得'+winn+'分';
+				return;
+			}
+		topnum=0;					
+		Img2.innerHTML='<img src="img/'+data[Math.round(Math.random()*4)]+'">';						
+		Img2.style.left=Math.random()*634+'px';	
+		Cry();		
+		timer=setInterval(function(){
+		Img2.style.top=topnum+'px'
+		topnum=topnum+5+add;
+		if(topnum>=370){
+			clearInterval(timer);
+			shack('top',20,Content)	
+			Img2.innerHTML='';
+			Img2.style.cssText=''
+			losen++;
+			Nums[1].innerHTML=losen+'分';
+			console.log(losen,Nums[0],Img2)
+
+		}
+		},30)
+	}
+	function Cry(){
+		Img2.onclick=function(){
+			if(!onoff)return;
+			onoff=false;
+			clearInterval(timer2);
+			
+			if((winn+losen)>=20){
+				clearInterval(timer2)
+				Hidden();
+				Nums[2].innerText='恭喜你，总分20，你共获得'+winn+'分';
+				return;
+			}
+			Img2.innerHTML='<img src="img/'+data[data.length-1]+'">';
+			clearInterval(timer);
+			shack('left',20,Img2);
+			setTimeout(function(){			
+				Img2.innerHTML='';
+				Img2.style.cssText=''
+				
+				setTimeout(function(){
+				onoff=true;		
+				drop();
+				timer2=setInterval(function(){					
+				drop();						
+		},3500-add*400)
+		},500)
+			},1000)
+			winn++;
+			if(winn%4==0)add++;
+			Nums[0].innerHTML=winn+'分';
+		}
+	}
+	function shack(dir,num,_this){
+		var timer3=null; var arr=[]; var j=0; 
+		var odir=getComputedStyle(_this)[dir];
+		console.log(odir)
+		for(var i=num;i>=0;i-=5){
+			arr.push(i,-i);
+		}
+		timer3=setInterval(function(){
+			if(j>=arr.length-1){clearInterval(timer3);} 
+			_this.style[dir]=(parseFloat(odir)+arr[j])+'px';
+			j++;
+			console.log(_this.style[dir])			
+		},70)
+		console.log(arr,_this)
+	}
+
+	function Show(){
+		losen=0;winn=0;add=0;
+		Gameover.style.display='none';
+		Nums[0].innerHTML=winn+'分'
+		Nums[1].innerHTML=losen+'分'
+		Start.style.bottom='-30px';
+		Start.style.opacity=0;		
+		Win.style.left='-100px';
+		Lose.style.left='-100px';
+		setTimeout(function(){Start.style.display='none';},500)		
+	}
+
+	function Hidden(){
+		Start.style.display='block'
+		Gameover.style.display='block';		
+		Win.style.left='14px';
+		Lose.style.left='14px';		
+		setTimeout(function(){		
+			Start.style.bottom='20px';
+			Start.style.opacity=1;},20)	
+	}
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
+<!-- 
+需求:
+1,点击开始btn,游戏开始
+2,表情随机往下落  Math.ceil()向上取整,Math.random()随机数,setInterval(),clearInterval(),
+3,点击表情左右抖动消失得分+1/没点中下落后窗口上下抖动失分+1,失分积满10分则游戏失败!!!
+ -->

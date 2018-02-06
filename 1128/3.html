@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>无标题文档</title>
+<style>
+	body,ul,p{margin:0; padding:0; font-family: "兰亭黑-简";}
+	.show {background: url(img/sure.jpg) no-repeat right bottom;  border: 4px solid #d05465;}
+	ul {width:600px; margin-top: 60px;}
+	body {background: -webkit-gradient(linear,0%100%, 100%00% ,from(#dcc3c2),to(#f2ecd9)); width:100%; height:100%; overflow-x: hidden;}
+	li {float: left;height:60px;width:130px; border: 4px solid #d7d7d7; list-style: none; margin-left: 46px; font-size: 28px;font-weight: bold; line-height: 60px; text-align: center;}
+	.main {margin:0 auto; height:330px; width:600px; border: 4px solid #e04b67; border-radius: 15px;box-shadow: 0px 0px 30px #e04b67; margin-top:100px;background:#fff;}
+	p {font-size: 38px; line-height: 62px; width:600px; text-align: center; margin-top: 80px; background: url(img/logo-1.jpg) no-repeat 150px 1px; color:#e85a74;}
+</style>
+	
+</head>
+
+<body>
+<div class="main">
+	<p>模拟单选</p>
+	<ul>
+		<li>男</li>
+		<li>女</li>
+		<li>保密</li>
+	</ul>
+</div>
+
+<script>
+	var Lis = document.querySelectorAll('li');
+	
+	for(var i=0; i<Lis.length;i++){
+		Lis[i].onclick = function(){
+			for(var j=0; j<Lis.length; j++){
+				Lis[j].className = '';
+			}
+			this.className = 'show';
+		}
+	}
+	
+	
+</script>
+
+</body>
+</html>
