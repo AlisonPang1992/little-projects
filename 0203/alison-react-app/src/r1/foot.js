@@ -62,9 +62,7 @@ class FootM extends Component {
                 <ul className="filters">
                     {list}
                 </ul>
-                <span className="clear-completed">
-                <span onClick={this.click}>清除已选中</span>
-                </span>
+                <button className="clear-completed" onClick={this.click}>清除已选中</button>
             </footer>
         )
     }
