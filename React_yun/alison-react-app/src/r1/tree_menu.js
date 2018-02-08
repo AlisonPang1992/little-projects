@@ -1,27 +1,47 @@
 import React,{Component} from 'react';
+import TreeMLi from './tree_menuLi'
 
 class TreeM extends Component {
     constructor(props){
         super(props)
-        console.log(props)
         this.state=({
             list:this.renderdata()
         })
-    }
-    click=()=>{
-
     }
 
     renderdata=()=>{
         var num='-1'
         var num0=0  
         let {data}=this.props;
-
-        this.rd=(num)=>{
+        this.getarr=()=>{
+            let arr=[]
+            for(var attr in data){
+                arr.push({id:data[attr].id,open:true})
+            }
+            return arr
+        }
+        let arrz=this.getarr()
+        
+        this.rd=(num,d)=>{
+            
             var list=[];
             var arr=this.getpid(num)           
-            arr.forEach((e,i)=>{               
-                list.push(<ul key={num0++} style={{marginLeft:num0==1?0:20}}><li ><div className="tree-title tree-ico open"><span>{this.rd(e.id).length==0?'':<i onClick={this.click} id={e.id}></i>}{e.title}</span></div>{this.rd(e.id)}</li></ul>)
+            arr.forEach((e,i)=>{
+                this.changei=(id,d)=>{
+                    if(e.pid==id)return d
+                    return true    
+                }   
+                let obj={
+                    id:e.id,
+                    rd:this.rd,
+                    title:e.title,
+                    num0:num0,
+                    num:num,
+                    data:data,
+                    d:d,
+                    arr:arrz
+                }            
+                list.push(<TreeMLi key={num0++} {...obj}/>)
             })
             return list
         }
