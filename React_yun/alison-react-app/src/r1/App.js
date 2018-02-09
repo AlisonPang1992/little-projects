@@ -70,23 +70,25 @@ class App extends Component {
                 "title": "张国荣"
             }
           },
-          
-
-        
+          dataid:0
+                 
       }
+    }
+    treeMC=(id)=>{
+        this.setState({
+            dataid:id
+        },console.log(id));
     }
     
     render(){ 
-      var {data}=this.state
-      console.log(data)
-
+      var {data,dataid}=this.state
 
       return (
         <div className="box">
             <HeadM data={data}/>
             <section className="section">
-                <TreeM data={data}/>
-                <FolderM data={data} />                
+                <TreeM data={data} treeMC={this.treeMC} />
+                <FolderM data={data} dataid={dataid} treeMC={this.treeMC}/>                
             </section>
 
             <ZhezhaoM />

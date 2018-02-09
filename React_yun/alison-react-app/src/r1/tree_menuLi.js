@@ -18,8 +18,9 @@ class TreeMLi extends Component {
         ev.stopPropagation();
     }
     clickli=(ev)=>{        
-        let {id,rd,title,num,data,num0,d}=this.props
+        let {id,rd,title,num,data,num0,d,treeMC}=this.props
         console.log(id)
+        treeMC(id)
         ev.stopPropagation();
     }
  

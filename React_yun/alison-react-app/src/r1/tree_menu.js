@@ -12,7 +12,7 @@ class TreeM extends Component {
     renderdata=()=>{
         var num='-1'
         var num0=0  
-        let {data}=this.props;
+        let {data,treeMC}=this.props;
         this.getarr=()=>{
             let arr=[]
             for(var attr in data){
@@ -39,7 +39,8 @@ class TreeM extends Component {
                     num:num,
                     data:data,
                     d:d,
-                    arr:arrz
+                    arr:arrz,
+                    treeMC:treeMC
                 }            
                 list.push(<TreeMLi key={num0++} {...obj}/>)
             })
