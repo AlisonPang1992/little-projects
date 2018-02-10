@@ -5,9 +5,27 @@ import FolderNav from './folderNav'
 
 
 class FolderM extends Component {
+    constructor(props) {
+        super(props)
+        this.state={
+            arr:[]
+        }
+    }
+    arr2=[]
+    
+    arrChange=(id,bol)=>{    
+        let {changeActive}=this.props
+        if(bol){this.arr2.push(id)}else{
+            this.arr2=this.arr2.filter(e=>e!=id)
+        }
+        console.log(this.arr2)
+        changeActive(this.arr2,bol)
+    }
+    
     arr=[]
+    
     getF=()=>{
-        let {dataid,data}=this.props;
+        let {dataid,data,changeActive}=this.props;
         let childrens=[];
         let parents=[];
         for(var attr in data){
@@ -27,15 +45,18 @@ class FolderM extends Component {
     }
 
     render(){
-        let {dataid,data,treeMC}=this.props;
-        let {c,p}=this.getF()
+        let {dataid,data,treeMC,changeActive}=this.props;
+        let {c,p}=this.getF()        
         let flist=c.map((e,i)=>{
             return <FolderS {...{
                 key:i,
                 id:e.id,
                 pid:e.pid,
                 tittle:e.title, 
-                treeMC:treeMC          
+                treeMC:treeMC  ,
+                arrChange :this.arrChange ,
+                onoff:e.onoff  ,
+                changeActive:changeActive
             }} />
         })
         let navlist=p.map((e,i)=>{

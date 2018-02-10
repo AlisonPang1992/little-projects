@@ -65,9 +65,6 @@ class Home extends React.Component {
         return (
             <div>
                 <div >{btns}</div>
-                <Route exact path='/'  render={(props)=>
-                    <Child url={props} changenum={this.changenum} />
-                } />
                 <Route  path='/:id'  render={(props)=>
                     <Child url={props} changenum={this.changenum} />
                 } />

@@ -16,7 +16,8 @@ class App extends Component {
                 "id": 0,
                 "pid": -1,
                 "title": "微云",
-                "type": "file"
+                "type": "file",
+                'onoff':false
             },
             "1": {
                 "id": 1,
@@ -27,57 +28,77 @@ class App extends Component {
             "2": {
                 "id": 2,
                 "pid": 0,
-                "title": "我的音乐"
+                "title": "我的音乐",
+                'onoff':false
             },
             "3": {
                 "id": 3,
                 "pid": 2,
-                "title": "周杰伦"
+                "title": "周杰伦",
+                'onoff':false
             },
             "4": {
                 "id": 4,
                 "pid": 3,
-                "title": "发如雪"
+                "title": "发如雪",
+                'onoff':false
             },
             "5": {
                 "id": 5,
                 "pid": 3,
-                "title": "夜曲"
+                "title": "夜曲",
+                'onoff':false
             },
             "6": {
                 "id": 6,
                 "pid": 1,
-                "title": "js程序设计"
+                "title": "js程序设计",
+                'onoff':false
             },
             "7": {
                 "id": 7,
                 "pid": 3,
-                "title": "稻香"
+                "title": "稻香",
+                'onoff':false
             },
             "8": {
                 "id": 8,
                 "pid": 2,
-                "title": "王杰"
+                "title": "王杰",
+                'onoff':false
             },
             "9": {
                 "id": 9,
                 "pid": 1,
-                "title": "js权威指南"
+                "title": "js权威指南",
+                'onoff':false
             },
             "10": {
                 "id": 10,
                 "pid": 2,
-                "title": "张国荣"
+                "title": "张国荣",
+                'onoff':false
             }
           },
-          dataid:0
-                 
+          dataid: 0,
+          active: []             
       }
     }
     treeMC=(id)=>{
         this.setState({
             dataid:id
         },console.log(id));
+    }
+    changeActive=(arr,bol)=>{
+        let {data}=this.state
+        for(var attr in data){
+            if(arr.includes(attr*1)){
+                data[attr].onoff=bol
+            }
+        }
+        this.setState({
+            data
+        });
     }
     
     render(){ 
@@ -88,7 +109,7 @@ class App extends Component {
             <HeadM data={data}/>
             <section className="section">
                 <TreeM data={data} treeMC={this.treeMC} />
-                <FolderM data={data} dataid={dataid} treeMC={this.treeMC}/>                
+                <FolderM data={data} dataid={dataid} treeMC={this.treeMC} changeActive={this.changeActive}/>                
             </section>
 
             <ZhezhaoM />
