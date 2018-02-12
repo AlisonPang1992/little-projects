@@ -4,23 +4,27 @@ class TreeMLi extends Component {
     constructor(props){
         super(props)
         this.state=({
-            arr:this.props.arr
+            arr:this.props.arr,
+            
         })
     }
     click=(ev)=>{
         let {arr}=this.state
         let arr2=arr.concat();
         let {id}=this.props
-        arr2[id].open=!(arr2[id].open )      
+        console.log(arr2)
+        arr2.forEach((e,i)=>{
+            if(e.id==id)e.open=!e.open
+        }) 
         this.setState({
             arr:arr2
         })
         ev.stopPropagation();
     }
     clickli=(ev)=>{        
-        let {id,rd,title,num,data,num0,d,treeMC}=this.props
-        console.log(id)
-        treeMC(id)
+        let {id,rd,title,num,data,num0,d,treeMC,dataid}=this.props
+        console.log(id,dataid)
+        if(id!=dataid)treeMC(id)
         ev.stopPropagation();
     }
  
@@ -29,7 +33,9 @@ class TreeMLi extends Component {
         let {arr}=this.state
         let arrid
         arr.forEach(e => {
-            if(e.id == id)  {arrid=e;return}         
+            if(e.id == id)  {arrid=e
+                if(rd(id).length==0)e.open=false
+                ;return}         
         });
         let name='tree-title tree-ico '+ (arrid.open?'open':'close')
         return (

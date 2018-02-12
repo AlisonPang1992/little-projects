@@ -2,17 +2,12 @@ import React,{Component} from 'react';
 import TreeMLi from './tree_menuLi'
 
 class TreeM extends Component {
-    constructor(props){
-        super(props)
-        this.state=({
-            list:this.renderdata()
-        })
-    }
 
     renderdata=()=>{
         var num='-1'
         var num0=0  
-        let {data,treeMC}=this.props;
+        let {data,treeMC,dataid}=this.props;
+        
         this.getarr=()=>{
             let arr=[]
             for(var attr in data){
@@ -40,7 +35,8 @@ class TreeM extends Component {
                     data:data,
                     d:d,
                     arr:arrz,
-                    treeMC:treeMC
+                    treeMC:treeMC,
+                    dataid:dataid
                 }            
                 list.push(<TreeMLi key={num0++} {...obj}/>)
             })
@@ -58,14 +54,11 @@ class TreeM extends Component {
     }
 
     render(){
-        let {data}=this.props
-        console.log(this)
-        let {list}=this.state
 
         return (
             <div className="tree-menu fix">
                 <ul>
-                    {list}
+                    {this.renderdata()}
                 </ul>
             </div>
         )

@@ -8,18 +8,15 @@ class FolderM extends Component {
     constructor(props) {
         super(props)
         this.state={
-            arr:[]
+            arr:[],
         }
     }
-    arr2=[]
-    
+  
     arrChange=(id,bol)=>{    
         let {changeActive}=this.props
-        if(bol){this.arr2.push(id)}else{
-            this.arr2=this.arr2.filter(e=>e!=id)
-        }
-        console.log(this.arr2)
-        changeActive(this.arr2,bol)
+        let arr2=[]
+        arr2.push(id)
+        changeActive(arr2,bol)
     }
     
     arr=[]
@@ -34,7 +31,6 @@ class FolderM extends Component {
         this.arr=[]
         this.getPa(dataid)
         parents=this.arr
-        console.log(childrens,parents)
         return {c:childrens,p:parents}
     }
     
@@ -42,6 +38,14 @@ class FolderM extends Component {
         let {data}=this.props;
         let val=data[id]
         if(!data[id]){return}else{this.arr.unshift(val); this.getPa(val.pid)}
+    }
+    click=()=>{
+       let {c,p}=this.getF()
+       let checkAll=c.every(e=>e.onoff)  
+       checkAll=!checkAll
+       c.forEach((e)=>{
+           this.arrChange(e.id,checkAll)
+       })
     }
 
     render(){
@@ -56,7 +60,8 @@ class FolderM extends Component {
                 treeMC:treeMC  ,
                 arrChange :this.arrChange ,
                 onoff:e.onoff  ,
-                changeActive:changeActive
+                changeActive:changeActive,
+                data:data
             }} />
         })
         let navlist=p.map((e,i)=>{
@@ -69,12 +74,14 @@ class FolderM extends Component {
                 treeMC:treeMC         
             }} />
         })
+        let checkAll=c.every(e=>e.onoff)
+        let cNameonoff=checkAll?'checkedAll checked':'checkedAll'
  
         return (
             <div className="folder-content">
                 <div className="breadmenu">
                     <div className="checkall">
-                        <i className="checkedAll"></i>
+                        <i className={cNameonoff} onClick={this.click} ></i>
                     </div>
                     <div className="bread-nav">
                         {navlist}

@@ -81,13 +81,17 @@ class App extends Component {
             }
           },
           dataid: 0,
-          active: []             
+          allcheck:false        
       }
     }
     treeMC=(id)=>{
+        let {data}=this.state
+        for(var attr in data){          
+                data[attr].onoff=false
+        }
         this.setState({
             dataid:id
-        },console.log(id));
+        },console.log(this.state.dataid));
     }
     changeActive=(arr,bol)=>{
         let {data}=this.state
@@ -100,15 +104,56 @@ class App extends Component {
             data
         });
     }
+    remove=()=>{
+        let {data}=this.state
+
+
+
+    }
+
+    rename=()=>{
+        let {data}=this.state
+        
+    }
+
+    del=()=>{
+        let {data}=this.state
+        let arr=[]
+        for(var attr in data){
+            if(data[attr].onoff){
+                arr.push(attr*1)
+                delete data[attr]
+            }           
+        }
+
+        for(var attr in data){
+            if(arr.includes(data[attr].pid)){
+                delete data[attr]
+            }
+        }
+        console.log(data)
+
+        this.setState({
+            data
+        });
+    }
+
+    creat=()=>{
+        let {data}=this.state
+        
+    }
+
+
+
     
     render(){ 
       var {data,dataid}=this.state
 
       return (
         <div className="box">
-            <HeadM data={data}/>
+            <HeadM data={data} remove={this.remove} rename={this.rename} del={this.del} creat={this.creat} />
             <section className="section">
-                <TreeM data={data} treeMC={this.treeMC} />
+                <TreeM data={data} treeMC={this.treeMC} dataid={dataid} />
                 <FolderM data={data} dataid={dataid} treeMC={this.treeMC} changeActive={this.changeActive}/>                
             </section>
 

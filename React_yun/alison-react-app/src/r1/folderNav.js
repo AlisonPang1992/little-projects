@@ -10,7 +10,7 @@ class FolderNav extends Component {
     render(){
         let {id,pid,tittle,onoff}=this.props
         return (    
-            onoff?<span href="javascript:;" onClick={this.click}>{tittle}</span>:<a href="javascript:;" onClick={this.click}>{tittle}</a>
+            onoff?<span href="javascript:;">{tittle}</span>:<a href="javascript:;" onClick={this.click}>{tittle}</a>
         )
     }
 }

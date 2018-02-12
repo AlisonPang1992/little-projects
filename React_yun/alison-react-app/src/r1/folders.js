@@ -18,12 +18,11 @@ class FolderS extends Component {
         });
     }
     iclick=()=>{
-        let {id,arrChange}=this.props
-        arrChange(id,!this.state.active)
-        this.cName="file-item "+ (!this.state.active?'active':'')
-        this.iname=(!this.state.active?'checked':'')
+        let {id,arrChange,onoff}=this.props
+        arrChange(id,!onoff)
+        console.log(!onoff)
         this.setState({
-            active:!this.state.active
+            active:!onoff
         });
     }
 
@@ -33,8 +32,7 @@ class FolderS extends Component {
     }
 
     render(){
-        let {id,pid,tittle,arrChange,onoff}=this.props
-        
+        let {id,pid,tittle,arrChange,onoff}=this.props       
         return (    
             <div className={onoff?'file-item active':'file-item'} onDoubleClick={this.dclick}>
             <img src={require("./img/folder-b.png")} alt="" />
