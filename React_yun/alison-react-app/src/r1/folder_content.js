@@ -49,7 +49,7 @@ class FolderM extends Component {
     }
 
     render(){
-        let {dataid,data,treeMC,changeActive}=this.props;
+        let {dataid,data,treeMC,changeActive,choose,changeChoose,changetext,rename}=this.props;
         let {c,p}=this.getF()        
         let flist=c.map((e,i)=>{
             return <FolderS {...{
@@ -61,7 +61,11 @@ class FolderM extends Component {
                 arrChange :this.arrChange ,
                 onoff:e.onoff  ,
                 changeActive:changeActive,
-                data:data
+                data:data,
+                choose:choose,
+                changeChoose:changeChoose,
+                changetext:changetext,
+                rename:rename
             }} />
         })
         let navlist=p.map((e,i)=>{
@@ -70,11 +74,11 @@ class FolderM extends Component {
                 id:e.id,
                 pid:e.pid,
                 tittle:e.title,
-                onoff:(i==(p.length-1))?true:false  ,
+                onoff:(i==(p.length-1))?true:false ,
                 treeMC:treeMC         
             }} />
         })
-        let checkAll=c.every(e=>e.onoff)
+        let checkAll=c[0]!=undefined && c.every(e=>e.onoff)
         let cNameonoff=checkAll?'checkedAll checked':'checkedAll'
  
         return (

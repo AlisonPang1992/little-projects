@@ -634,7 +634,7 @@ html,body{
 	left: 50%;
 	top:50%;
 	background: #fff;
-	display: none;
+	display: block;
 	margin: -208px 0 0 -203px;
 }
 

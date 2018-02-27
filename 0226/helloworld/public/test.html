@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    .yes{
+        color:green
+    }
+    .no{
+        color:red
+    }
+    </style>
+</head>
+
+<body>
+    用户名：<input type="text" name="" id="user">
+    <span id='sp'></span>
+    <br />
+    密码：<input type="text" name="" id="pass">
+    <br />
+    <input type="button" value="submit">
+<script>
+    var user=document.getElementById('user')
+    var sp=document.getElementById('sp')
+    user.onfocus=function(){
+        user.className=''
+    }
+    user.onblur=function(){
+        let val=this.value
+        const ajax=new XMLHttpRequest
+        ajax.open('get','/get?name='+val,true)
+        ajax.send()
+        ajax.onload=function(){
+            let json=JSON.parse(ajax.responseText)
+            if(json.code==0){
+                user.className='no'
+            }else if(json.code==1){
+                user.className='yes'
+            }
+            sp.innerText=json.msg
+            console.log(json)
+        }
+    }
+    
+
+</script>
+</body>
+</html>
